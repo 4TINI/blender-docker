@@ -13,7 +13,7 @@ _blender_run_completions() {
 }
 
 # Alias for the blender script
-alias blender='. $HOME/Docker/Blender/docker_blender_run.sh'
+alias blender='. $HOME/git/blender-docker/docker_blender_run.sh'
 
 # Register the completion function
 complete -F _blender_run_completions blender

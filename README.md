@@ -50,7 +50,16 @@ To build the docker run the following command
 Check releases at https://download.blender.org/release/. If no release is provided it will default to Blender 4.1.1.
 
 ## Run the Docker Container
-To simplify as much as possible the run process a custom alias have been crafted in the file [blender_aliases.sh](blender_aliases.sh). To make it available from everywhere run within the repo the following command:
+To simplify as much as possible the run process a custom alias have been crafted in the file [blender_aliases.sh](blender_aliases.sh). 
+
+Modify the following path in the [blender_aliases.sh](blender_aliases.sh) file accordingly with the location where you cloned the repo.
+
+```bash
+# Alias for the blender script
+alias blender='. $HOME/git/blender-docker/docker_blender_run.sh'
+```
+
+To make it available from everywhere run within the repo the following command:
 
 ```bash
 echo "source $PWD/blender_aliases.sh" >> ~/.bashrc
@@ -63,5 +72,3 @@ blender blender:4.1
 ```
 
 The first time the run command is executed a folder called `blender` will be created in you HOME and automatically mounted within your container. Keep there the blender material created in order to save it locally. All the files won't be protected and will be owned by your hostname since the Dockerfile has been designed following the guidelines in [this guide](https://medium.com/@luca4tini/simplifying-the-use-of-a-custom-non-root-user-in-a-docker-container-72473ebd7482).
-
-
