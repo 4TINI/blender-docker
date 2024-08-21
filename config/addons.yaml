@@ -1,0 +1,4 @@
+addons:
+    - name: rokoko-studio-live-blender-master
+      link: https://github.com/Rokoko/rokoko-studio-live-blender/archive/refs/heads/master.zip
+    - name: measureit
