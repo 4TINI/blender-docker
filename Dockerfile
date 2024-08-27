@@ -98,11 +98,23 @@ COPY config/requirements.txt .
 
 # Define the path to Blender's Python executable
 ARG BLENDER_PYTHON_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/bin
+ARG BLENDER_LIB_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/lib/python*/site-packages
 
-# Install Python packages using Blender's bundled Python
-RUN ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
-    ${BLENDER_PYTHON_PATH}/pip3 install --upgrade pip && \
-    ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt
+RUN PYTHON_VERSION=$(python3 --version | sed 's/Python //'); \
+    if [ "$(echo $PYTHON_VERSION | awk -F. '{print ($1 > 3) || ($1 == 3 && $2 >= 9)}')" -eq 1 ]; then \
+        ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
+        ${BLENDER_PYTHON_PATH}/python3* -m pip install -r /home/${USERNAME}/requirements.txt --target ${BLENDER_LIB_PATH} ; \
+    else \
+        BLENDER_PYTHON_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/bin \
+        ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
+        ${BLENDER_PYTHON_PATH}/pip3 install --upgrade pip && \
+        ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt; \
+    fi
+
+# # Install Python packages using Blender's bundled Python
+# RUN ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
+#     ${BLENDER_PYTHON_PATH}/pip3 install --upgrade pip && \
+#     ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt
 
 # Copy the script for installing Blender addons
 COPY scripts/install_blender_addons.py .
