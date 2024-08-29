@@ -111,11 +111,6 @@ RUN PYTHON_VERSION=$(python3 --version | sed 's/Python //'); \
         ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt; \
     fi
 
-# # Install Python packages using Blender's bundled Python
-# RUN ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
-#     ${BLENDER_PYTHON_PATH}/pip3 install --upgrade pip && \
-#     ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt
-
 # Copy the script for installing Blender addons
 COPY scripts/install_blender_addons.py .
 
