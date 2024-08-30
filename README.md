@@ -3,7 +3,7 @@
 Managing multiple Blender installations with distinct requirements and addons can be a complex and cumbersome task, especially when dealing with diverse project needs and software configurations. Using Docker to handle this process can significantly streamline and simplify the workflow. Docker allows each Blender instance to run in its own isolated container, ensuring that different versions, addons, and dependencies do not conflict with one another. This isolation not only prevents compatibility issues but also makes it easier to manage and switch between different setups without altering the system's core environment. Additionally, Docker's containerization facilitates consistent and reproducible environments, which is particularly beneficial for collaborative projects and version control. By leveraging Docker, users can efficiently maintain multiple Blender configurations, enhance productivity, and reduce the risk of errors or system conflicts.
 
 ## Requirements
-- Docker (check [here](https://gist.github.com/4TINI/d05cf36d17826d775d007ac2d0a887d2 to install it autmatically))
+- Docker (check [here](https://gist.github.com/4TINI/d05cf36d17826d775d007ac2d0a887d2) to install it autmatically)
 - Enable your graphic card, if you have one. Follow [this guide](https://medium.com/@luca4tini/guide-to-easily-enable-the-graphic-card-in-ubuntu-4a0b21625bec) if you don't know how to do it.
 
 For Python requirements in the Docker edit the [requirements.txt](config/requirements.txt) file.
