@@ -14,10 +14,10 @@ BLENDER_VERSION=${1:-"4.1.1"}
 
 # If no image name was provided as an argument, prompt the user
 if [[ -z "$1" ]]; then
-    echo "No Blender version provided. Defaulting to image $BLENDER_VERSION."
+    echo "No Blender version provided. Defaulting to version $BLENDER_VERSION."
 
     # Prompt the user for confirmation to proceed or specify a different Blender image
-    read -p "Do you want to proceed with Blender image $BLENDER_VERSION? (yes to continue, or enter a different image): " USER_INPUT
+    read -p "Do you want to proceed with Blender version $BLENDER_VERSION? (yes to continue, or enter a different image): " USER_INPUT
 
     # If the user provides a different Blender image, update the IMAGE_NAME variable
     if [[ -n "$USER_INPUT" && "$USER_INPUT" != "yes" ]]; then
