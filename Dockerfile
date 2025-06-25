@@ -4,6 +4,8 @@ ARG UBUNTU_RELEASE=20.04
 # Base image with NVIDIA OpenGL runtime
 FROM nvidia/opengl:1.1-glvnd-runtime-ubuntu${UBUNTU_RELEASE}
 
+RUN set -ex
+
 # Build arguments for the username, user ID, and group ID
 ARG USERNAME
 ARG USERID
@@ -97,18 +99,18 @@ WORKDIR /home/${USERNAME}
 COPY config/requirements.txt .
 
 # Define the path to Blender's Python executable
-ARG BLENDER_PYTHON_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/bin
-ARG BLENDER_LIB_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/lib/python*/site-packages
+ENV BLENDER_PYTHON_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/bin
+ENV BLENDER_LIB_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/lib/python*/site-packages
 
 RUN PYTHON_VERSION=$(python3 --version | sed 's/Python //'); \
     if [ "$(echo $PYTHON_VERSION | awk -F. '{print ($1 > 3) || ($1 == 3 && $2 >= 9)}')" -eq 1 ]; then \
-        ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
-        ${BLENDER_PYTHON_PATH}/python3* -m pip install -r /home/${USERNAME}/requirements.txt --target ${BLENDER_LIB_PATH} ; \
+        ${BLENDER_PYTHON_PATH}/python* -m ensurepip && \
+        ${BLENDER_PYTHON_PATH}/python* -m pip install -r /home/${USERNAME}/requirements.txt --target ${BLENDER_LIB_PATH} ; \
     else \
         BLENDER_PYTHON_PATH=/usr/local/blender/${BLENDER_MAJOR}/python/bin \
-        ${BLENDER_PYTHON_PATH}/python3* -m ensurepip && \
-        ${BLENDER_PYTHON_PATH}/pip3 install --upgrade pip && \
-        ${BLENDER_PYTHON_PATH}/pip3 install -r ./requirements.txt; \
+        ${BLENDER_PYTHON_PATH}/python* -m ensurepip && \
+        ${BLENDER_PYTHON_PATH}/python* -m pip install --upgrade pip && \
+        ${BLENDER_PYTHON_PATH}/python* -m pip install -r ./requirements.txt; \
     fi
 
 # Copy the script for installing Blender addons

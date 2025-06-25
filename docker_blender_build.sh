@@ -57,4 +57,4 @@ docker build -f Dockerfile \
         .
 
 # Clean up unused Docker objects
-yes | docker system prune >/dev/null 2>&1
+yes | docker system prune --force >/dev/null 2>&1
