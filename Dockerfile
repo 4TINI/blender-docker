@@ -76,6 +76,8 @@ RUN apt-get update && \
         libegl1-mesa \
         libegl1 \
         liblz4-dev \
+        mesa-utils \
+        libgl1-mesa-dri \
         ocl-icd-libopencl1 && \
     # Clean up package caches and remove unnecessary files
     rm -rf /var/lib/apt/lists/* && \
