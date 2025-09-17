@@ -1,1 +1,6 @@
+boto3
+cryptography
+gql<3.5
 pyyaml
+scipy
+websockets

@@ -2,12 +2,6 @@
 
 xhost + >/dev/null 2>&1
 
-# Extract the domain between /home and the username if exists
-DOMAIN=$(echo "$HOME" | sed -n 's|/home/\(.*\)/'"$USER"'.*|\1|p')
-
-# Set DOMAIN to an empty string if no domain is found
-DOMAIN=${DOMAIN:+/$DOMAIN}
-
 IMAGE_NAME=${1:-"blender:4.1"}
 
 # If no image name was provided as an argument, prompt the user
@@ -34,11 +28,11 @@ fi
 
 echo "Docker image $IMAGE_NAME found. Proceeding..."
 
-DOMAIN_HOME="/home$DOMAIN/$USER"
+
 CONTAINER_NAME="blender"
 WELCOME_MSG="You're in a Blender Docker Container!"
 
-mkdir -p $DOMAIN_HOME/blender
+mkdir -p $HOME/blender
 
 # Function to check if GPU is available
 function gpu_available {
@@ -69,8 +63,8 @@ else
             "--ipc=host"
             "-v /tmp/.X11-unix:/tmp/.X11-unix"
             "-v /dev*:/dev*" 
-            "-v $DOMAIN_HOME/.Xauthority:/home/$USER/.Xauthority"
-            "--mount src=$DOMAIN_HOME/blender,target=/home/$USER/blender,type=bind"
+            "-v $HOME/.Xauthority:/home/$USER/.Xauthority"
+            "--mount src=$HOME/blender,target=/home/$USER/blender,type=bind"
             "-e DISPLAY=$DISPLAY"
             "-e "TERM=xterm-256color""
         )
@@ -89,6 +83,6 @@ else
 
     # Run Docker container with the constructed command
     echo "Run container: $CONTAINER_NAME. Exiting this terminal will remove the running container."
-    echo "Mounted volume: $DOMAIN_HOME/blender"
+    echo "Mounted volume: $HOME/blender"
     eval "${docker_run_cmd[@]}" 
 fi

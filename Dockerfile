@@ -75,6 +75,7 @@ RUN apt-get update && \
         libxrender-dev \
         libegl1-mesa \
         libegl1 \
+        liblz4-dev \
         ocl-icd-libopencl1 && \
     # Clean up package caches and remove unnecessary files
     rm -rf /var/lib/apt/lists/* && \

@@ -2,3 +2,5 @@ addons:
     - name: rokoko-studio-live-blender-master
       link: https://github.com/Rokoko/rokoko-studio-live-blender/archive/refs/heads/master.zip
     - name: measureit
+    - name: blenderkit
+      link: https://www.blenderkit.com/addon-download/blenderkit.zip?source=get-blenderkit&source_asset_id=&repository=/api/v1/extensions/&blender_version_min=4.2.0
